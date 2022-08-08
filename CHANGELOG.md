@@ -1,6 +1,11 @@
 # Changelog
+## [1.0.3] 08/08/2022
+- Fix CHANGELOG.md
+- Fix package.json
+- Change Editor\ALFBTObject.cs
+- Change Runtime\TranslationManager.cs
 ## [1.0.2] 31/07/2022
-- Add CHANGELOG.md
+- Fix CHANGELOG.md
 - Fix package.json
 - Add Cobilas MG Translations.asset
 - Remove Runtime\DependencyWarning.cs

@@ -25,7 +25,7 @@ namespace Cobilas.Unity.Management.Translation {
         [CRIOLM_BeforeSceneLoad]
         private static void Init() {
             Application.quitting += management.Dispose;
-            TextAsset[] texts = CobilasResources.GetAllSpecificObjectInFolder<TextAsset>("Translation");
+            TextAsset[] texts = CobilasResources.GetAllSpecificObjectInFolder<TextAsset>("Resources/Translation");
             for (int I = 0; I < ArrayManipulation.ArrayLength(texts); I++) {
                 Debug.Log(texts[I].name);
                 using (ALFBTRead read = ALFBTRead.Create(new StringReader(texts[I].text)))

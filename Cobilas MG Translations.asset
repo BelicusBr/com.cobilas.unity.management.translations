@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Cobilas MG Translations
   m_EditorClassIdentifier: 
   _URL: https://github.com/BelicusBr/com.cobilas.unity.management.translations.git
-  branch: 1.0.2
+  branch: 1.0.3
   repos:
   - start: 1
     _URL: https://github.com/BelicusBr/com.cobilas.cobilascore.git

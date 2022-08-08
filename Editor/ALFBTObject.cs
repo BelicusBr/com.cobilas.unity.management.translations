@@ -20,14 +20,18 @@ namespace Cobilas.Unity.Editor.Management.Translation {
         [InitializeOnLoadMethod]
         private static void InitBuild() {
             CobilasBuildProcessor.EventOnPreprocessBuild += (p, r) => {
-                if (p == CobilasEditorProcessor.PriorityProcessor.Low)
+                if (p == CobilasEditorProcessor.PriorityProcessor.Middle)
+                    Refresh();
+            };
+            CobilasEditorProcessor.playModeStateChanged += (pp, pm) => {
+                if (pp == CobilasEditorProcessor.PriorityProcessor.Middle &&
+                    pm == PlayModeStateChange.EnteredPlayMode)
                     Refresh();
             };
         }
 
-        [CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.BeforeSceneLoad)]
         private static void Refresh() {
-            Debug.Log($"Refresh resources paths[{DateTime.Now}]");
+            Debug.Log($"[Translation]Refresh resources paths[{DateTime.Now}]");
             string path = Path.Combine(Application.dataPath, "Resources/Translation").Replace('\\', '/');
             if (!Directory.Exists(path))
                 Directory.CreateDirectory(path);
