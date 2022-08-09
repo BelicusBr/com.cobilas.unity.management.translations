@@ -1,4 +1,7 @@
 # Changelog
+## [1.0.3] 09/08/2022
+- Change CHANGELOG.md
+- Change Editor\ALFBTObject.cs
 ## [1.0.3] 08/08/2022
 - Fix CHANGELOG.md
 - Fix package.json

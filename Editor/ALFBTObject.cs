@@ -5,8 +5,6 @@ using UnityEditor;
 using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
 using Cobilas.Unity.Management.Build;
-using Cobilas.Unity.Management.Resources;
-using Cobilas.Unity.Management.RuntimeInitialize;
 
 namespace Cobilas.Unity.Editor.Management.Translation {
     [CreateAssetMenu(fileName = "new Translation object", menuName = "Cobilas/TranslationManager/Translation object")]
@@ -20,11 +18,11 @@ namespace Cobilas.Unity.Editor.Management.Translation {
         [InitializeOnLoadMethod]
         private static void InitBuild() {
             CobilasBuildProcessor.EventOnPreprocessBuild += (p, r) => {
-                if (p == CobilasEditorProcessor.PriorityProcessor.Middle)
+                if (p == CobilasEditorProcessor.PriorityProcessor.High)
                     Refresh();
             };
             CobilasEditorProcessor.playModeStateChanged += (pp, pm) => {
-                if (pp == CobilasEditorProcessor.PriorityProcessor.Middle &&
+                if (pp == CobilasEditorProcessor.PriorityProcessor.High &&
                     pm == PlayModeStateChange.EnteredPlayMode)
                     Refresh();
             };
