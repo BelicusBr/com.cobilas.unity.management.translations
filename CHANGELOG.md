@@ -1,4 +1,22 @@
 # Changelog
+## [1.0.3] 13/08/2022
+### Change
+- Change Editor\Cobilas.Unity.Editor.Management.Translations.asmdef
+- Change Runtime\Cobilas.Unity.Management.Translations.asmdef
+- Change Runtime\TranslationManager.cs
+### Add
+- Add Runtime\TranslationList.cs
+- Add Runtime\ALFBTTextFlag.cs
+- Add Runtime\ALFBTMarkingFlag.cs
+- Add Runtime\ALFBTLanguage.cs
+- Add Runtime\ALFBTFlagBase.cs
+- Add Editor\TranslationListInspector.cs
+- Add Editor\ALFBTTextFlagInspector.cs
+- Add Editor\ALFBTMarkingFlagInspector.cs
+- Add Editor\ALFBTLanguageInspector.cs
+### Remove
+- Remove Editor\ALFBTObject.cs
+- Remove Editor\ALFBTTextField.cs
 ## [1.0.3] 09/08/2022
 - Change CHANGELOG.md
 - Change Editor\ALFBTObject.cs

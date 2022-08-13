@@ -15,22 +15,6 @@
     ],
     "autoReferenced": true,
     "defineConstraints": [],
-    "versionDefines": [
-        {
-            "name": "com.cobilas.cobilascore",
-            "expression": "1.0",
-            "define": "COBILAS_CORE"
-        },
-        {
-            "name": "com.cobilas.unity.management.runtime",
-            "expression": "1.0",
-            "define": "COBILAS_MGT_RUNTIME"
-        },
-        {
-            "name": "com.cobilas.unity.management.resource",
-            "expression": "1.0",
-            "define": "COBILAS_MGT_RESOURCE"
-        }
-    ],
+    "versionDefines": [],
     "noEngineReferences": false
 }

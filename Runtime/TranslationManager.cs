@@ -1,4 +1,3 @@
-using System.IO;
 using UnityEngine;
 using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
@@ -7,7 +6,9 @@ using Cobilas.IO.Alf.Management.Alfbt;
 using Cobilas.Unity.Management.Resources;
 using Cobilas.Unity.Management.RuntimeInitialize;
 #if UNITY_EDITOR
+using System.IO;
 using UnityEditor;
+using Cobilas.Unity.Management.Build;
 #endif
 
 namespace Cobilas.Unity.Management.Translation {
@@ -17,20 +18,49 @@ namespace Cobilas.Unity.Management.Translation {
 #if UNITY_EDITOR
         [InitializeOnLoadMethod]
         private static void InitEditor() {
+            CobilasBuildProcessor.EventOnPreprocessBuild += (pp, br) => {
+                if (pp == CobilasEditorProcessor.PriorityProcessor.High)
+                    Refresh();
+            };
+            CobilasEditorProcessor.projectChanged += (pp) => {
+                if (pp == CobilasEditorProcessor.PriorityProcessor.Low)
+                    Refresh();
+            };
             if (!EditorApplication.isPlaying) return;
             Reset();
             Init();
         }
-#endif
+
+        [MenuItem("Tools/Translation Manager/Refresh Translation Manager")]
+        [CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.BeforeSceneLoad)]
+        private static void Refresh() {
+            Debug.Log(string.Format("[TranslationManager]Refresh [{0}]", System.DateTime.Now));
+            TranslationList.Refresh();
+        }
+
+        [MenuItem("Tools/Translation Manager/Create Translation Folder")]
+        private static void CreateTranslationFolder() {
+            string path = Path.Combine(Application.dataPath, "Resources/Translation");
+            if (!Directory.Exists(path)) {
+                Directory.CreateDirectory(path);
+                AssetDatabase.Refresh();
+            }
+        }
+
+        [CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.AfterSceneLoad)]
+#else
         [CRIOLM_BeforeSceneLoad]
+#endif
         private static void Init() {
             Application.quitting += management.Dispose;
-            TextAsset[] texts = CobilasResources.GetAllSpecificObjectInFolder<TextAsset>("Resources/Translation");
-            for (int I = 0; I < ArrayManipulation.ArrayLength(texts); I++) {
-                Debug.Log(texts[I].name);
-                using (ALFBTRead read = ALFBTRead.Create(new StringReader(texts[I].text)))
-                    Load(read);
-            }
+            TranslationList[] list = CobilasResources.GetAllSpecificObjectInFolder<TranslationList>("Resources/Translation");
+            for (int I = 0; I < ArrayManipulation.ArrayLength(list); I++)
+                foreach (var item in list[I])
+                    if (item != null)
+                        using (item.Stream) {
+                            using (ALFBTRead read = ALFBTRead.Create(item.Stream))
+                                Load(read);
+                        }
         }
 
         public static void Reset() {
