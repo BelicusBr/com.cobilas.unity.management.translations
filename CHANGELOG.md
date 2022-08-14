@@ -1,5 +1,9 @@
 # Changelog
 ## [1.0.3] 13/08/2022
+- Change Cobilas MG Translations.asset
+- Change Runtime\ALFBTLanguage.cs
+- Change Runtime\TranslationManager.cs
+## [1.0.3] 13/08/2022
 ### Change
 - Change Editor\Cobilas.Unity.Editor.Management.Translations.asmdef
 - Change Runtime\Cobilas.Unity.Management.Translations.asmdef
