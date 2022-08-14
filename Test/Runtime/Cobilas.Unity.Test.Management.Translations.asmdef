@@ -1,0 +1,19 @@
+{
+    "name": "Cobilas.Unity.Test.Management.Translations",
+    "references": [
+        "Cobilas.Unity.Management.Translations"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "Cobilas.IO.Alf.Alfbt.dll",
+        "Cobilas.IO.Alf.Management.Alfbt.dll",
+        "Cobilas.Collections.dll"
+    ],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

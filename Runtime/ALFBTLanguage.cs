@@ -1,9 +1,9 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
 using System.Collections.Generic;
 #if UNITY_EDITOR
-using System.IO;
 using UnityEditor;
 #endif
 
@@ -56,10 +56,10 @@ namespace Cobilas.Unity.Management.Translation {
                     for (int J = 0; J < mf.Count; J++)
                         pairs[mf.GUITarget].Write.WriteMarkingFlag(mf.MarkingFields[J].Name, mf.MarkingFields[J].Text);
                 } else if (temp is ALFBTTextFlag tf) {
-                    if (pairs.ContainsKey(tf.GUITarget))
+                    if (!pairs.ContainsKey(tf.GUITarget))
                         pairs.Add(language.gUITargets[I], new ALFBTWriteTemp(language, tf.GUITarget));
                     for (int J = 0; J < tf.Count; J++)
-                        pairs[tf.GUITarget].Write.WriteMarkingFlag(tf.TextFields[J].Name, tf.TextFields[J].Text);
+                        pairs[tf.GUITarget].Write.WriteTextFlag(tf.TextFields[J].Name, tf.TextFields[J].Text);
                 }
             }
 
@@ -83,7 +83,7 @@ namespace Cobilas.Unity.Management.Translation {
                 write.WriteMarkingFlag("language", language.lang);
                 write.WriteMarkingFlag("gui_target", guiTarget);
                 if (!string.IsNullOrEmpty(language.displayName))
-                    write.WriteMarkingFlag("display_name", language.displayName);
+                    write.WriteTextFlag("display_name", language.displayName);
             }
 
             public void Dispose() {

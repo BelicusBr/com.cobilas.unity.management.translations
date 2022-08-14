@@ -1,3 +1,4 @@
+using System.IO;
 using UnityEngine;
 using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
@@ -6,7 +7,6 @@ using Cobilas.IO.Alf.Management.Alfbt;
 using Cobilas.Unity.Management.Resources;
 using Cobilas.Unity.Management.RuntimeInitialize;
 #if UNITY_EDITOR
-using System.IO;
 using UnityEditor;
 using Cobilas.Unity.Management.Build;
 #endif
@@ -58,8 +58,10 @@ namespace Cobilas.Unity.Management.Translation {
                 foreach (var item in list[I])
                     if (item != null)
                         using (item.Stream) {
+                            item.Stream.Seek(0, SeekOrigin.Begin);
                             using (ALFBTRead read = ALFBTRead.Create(item.Stream))
-                                Load(read);
+                                if (Load(read))
+                                    Debug.Log("[MemoryStream]ALFBT load");
                         }
         }
 
@@ -68,7 +70,7 @@ namespace Cobilas.Unity.Management.Translation {
             management = new TranslationManagement();
         }
 
-        public static void Load(ALFBTRead read) => management.LoadTranslation(read);
+        public static bool Load(ALFBTRead read) => management.LoadTranslation(read);
 
         public static TextFlag GetTextFlag(string path) => management.GetTextFlag(path);
 
