@@ -1,7 +1,8 @@
 {
     "name": "Cobilas.Unity.Editor.Management.Translations",
     "references": [
-        "Cobilas.Unity.Management.Translations"
+        "Cobilas.Unity.Management.Translations",
+        "Cobilas.Core"
     ],
     "includePlatforms": [
         "Editor"
@@ -9,10 +10,7 @@
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,
-    "precompiledReferences": [
-        "Cobilas.IO.Alf.Alfbt.dll",
-        "Cobilas.Collections.dll"
-    ],
+    "precompiledReferences": [],
     "autoReferenced": true,
     "defineConstraints": [
         "UNITY_EDITOR"

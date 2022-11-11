@@ -1,15 +1,16 @@
 {
     "name": "com.cobilas.unity.management.translations",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "repository": "https://github.com/BelicusBr/com.cobilas.unity.management.translations.git",
     "relatedPackages": [
-        "1.0.3"
+        "1.0.3",
+        "1.0.4"
     ],
     "gitDependencies": [
         {
-            "URL": "https://github.com/BelicusBr/com.cobilas.cobilascore.git",
-            "name": "com.cobilas.cobilascore",
-            "branch": "1.0.32"
+            "URL": "https://github.com/BelicusBr/com.cobilas.core.git",
+            "name": "com.cobilas.core",
+            "branch": "1.0.0"
         },
         {
             "URL": "https://github.com/BelicusBr/com.cobilas.unity.management.runtime.git",
