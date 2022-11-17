@@ -4,8 +4,8 @@ using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
 using Cobilas.IO.Alf.Alfbt.Flags;
 using Cobilas.IO.Alf.Management.Alfbt;
+using Cobilas.Unity.Management.Runtime;
 using Cobilas.Unity.Management.Resources;
-using Cobilas.Unity.Management.RuntimeInitialize;
 #if UNITY_EDITOR
 using UnityEditor;
 using Cobilas.Unity.Management.Build;
@@ -22,9 +22,10 @@ namespace Cobilas.Unity.Management.Translation {
                 if (pp == CobilasEditorProcessor.PriorityProcessor.High)
                     Refresh();
             };
-            CobilasEditorProcessor.projectChanged += (pp) => {
-                if (pp == CobilasEditorProcessor.PriorityProcessor.Low)
-                    Refresh();
+            CobilasEditorProcessor.playModeStateChanged += (pr, pm) => {
+                if (pr == CobilasEditorProcessor.PriorityProcessor.Low &&
+                    pm == PlayModeStateChange.EnteredPlayMode)
+                    Refresh();                
             };
             if (!EditorApplication.isPlaying) return;
             Reset();
@@ -32,7 +33,8 @@ namespace Cobilas.Unity.Management.Translation {
         }
 
         [MenuItem("Tools/Translation Manager/Refresh Translation Manager")]
-        [CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.BeforeSceneLoad)]
+        //[CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.BeforeSceneLoad)]
+        [CallWhenStart(InitializePriority.High, "#ResourceManager")]
         private static void Refresh() {
             Debug.Log(string.Format("[TranslationManager]Refresh [{0}]", System.DateTime.Now));
             TranslationList.Refresh();
@@ -47,9 +49,10 @@ namespace Cobilas.Unity.Management.Translation {
             }
         }
 
-        [CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.AfterSceneLoad)]
+        //[CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.AfterSceneLoad)]
+        [CallWhenStart(InitializePriority.Low, "#ResourceManager")]
 #else
-        [CRIOLM_BeforeSceneLoad]
+        [StartBeforeSceneLoad]
 #endif
         private static void Init() {
             Application.quitting += management.Dispose;
