@@ -54,12 +54,12 @@ namespace Cobilas.Unity.Management.Translation {
                     if (!pairs.ContainsKey(mf.GUITarget))
                         pairs.Add(language.gUITargets[I], new ALFBTWriteTemp(language, mf.GUITarget));
                     for (int J = 0; J < mf.Count; J++)
-                        pairs[mf.GUITarget].Write.WriteMarkingFlag(mf.MarkingFields[J].Name, mf.MarkingFields[J].Text);
+                        pairs[mf.GUITarget].Write.WriterMarkingFlag(mf.MarkingFields[J].Name, mf.MarkingFields[J].Text);
                 } else if (temp is ALFBTTextFlag tf) {
                     if (!pairs.ContainsKey(tf.GUITarget))
                         pairs.Add(language.gUITargets[I], new ALFBTWriteTemp(language, tf.GUITarget));
                     for (int J = 0; J < tf.Count; J++)
-                        pairs[tf.GUITarget].Write.WriteTextFlag(tf.TextFields[J].Name, tf.TextFields[J].Text);
+                        pairs[tf.GUITarget].Write.WriterTextFlag(tf.TextFields[J].Name, tf.TextFields[J].Text);
                 }
             }
 
@@ -71,25 +71,25 @@ namespace Cobilas.Unity.Management.Translation {
 
         public sealed class ALFBTWriteTemp : System.IDisposable {
             private MemoryStream stream;
-            private ALFBTWrite write;
+            private ALFBTWriter write;
 
-            public ALFBTWrite Write => write;
+            public ALFBTWriter Write => write;
             public MemoryStream Stream => stream;
 
             public ALFBTWriteTemp(ALFBTLanguage language, string guiTarget) {
-                write = ALFBTWrite.Create(stream = new MemoryStream());
-                write.WriteHeaderFlag();
+                write = ALFBTWriter.Create(stream = new MemoryStream());
+                write.WriterHeaderFlag();
 
-                write.WriteMarkingFlag("language", language.lang);
-                write.WriteMarkingFlag("gui_target", guiTarget);
+                write.WriterMarkingFlag("language", language.lang);
+                write.WriterMarkingFlag("gui_target", guiTarget);
                 if (!string.IsNullOrEmpty(language.displayName))
-                    write.WriteTextFlag("display_name", language.displayName);
+                    write.WriterTextFlag("display_name", language.displayName);
             }
 
             public void Dispose() {
                 stream.Dispose();
 
-                write = (ALFBTWrite)null;
+                write = (ALFBTWriter)null;
                 stream = (MemoryStream)null;
             }
         }

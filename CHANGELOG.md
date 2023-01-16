@@ -1,8 +1,13 @@
 # Changelog
+## [1.0.6] 15/01/2023
+### Change
+O `TranslationManager` foi modificado para se adequar.
+#### Changed file
+- ALFBTLanguage.cs
 ## [1.0.5] 17/11/2022
-#### Change 1
+### Change 1
 O `TranslationManager` está usando o novo `StartMethodOnRun` para inicialização.
-#### Change 2
+### Change 2
 Agora o `TranslationManager` vai chamar o método `void Refresh()` quando o </br>
 projeto for construído ou quando o editor entra em modo `PlayModeStateChange.EnteredPlayMode`.
 ## [1.0.3] 13/08/2022
