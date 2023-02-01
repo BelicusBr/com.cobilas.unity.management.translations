@@ -3,6 +3,7 @@ using UnityEngine;
 using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
 using Cobilas.IO.Alf.Alfbt.Flags;
+using Cobilas.IO.Alf.Alfbt.Language;
 using Cobilas.IO.Alf.Management.Alfbt;
 using Cobilas.Unity.Management.Runtime;
 using Cobilas.Unity.Management.Resources;
@@ -14,7 +15,9 @@ using Cobilas.Unity.Management.Build;
 namespace Cobilas.Unity.Management.Translation {
     public static class TranslationManager {
 
-        private static TranslationManagement management = new TranslationManagement();
+        public static int LanguageSelected;
+
+        private static LanguageManager management = new LanguageManager();
 #if UNITY_EDITOR
         [InitializeOnLoadMethod]
         private static void InitEditor() {
@@ -60,27 +63,60 @@ namespace Cobilas.Unity.Management.Translation {
             for (int I = 0; I < ArrayManipulation.ArrayLength(list); I++)
                 foreach (var item in list[I])
                     if (item != null)
-                        using (item.Stream) {
-                            item.Stream.Seek(0, SeekOrigin.Begin);
-                            using (ALFBTRead read = ALFBTRead.Create(item.Stream))
-                                if (Load(read))
-                                    Debug.Log("[MemoryStream]ALFBT load");
+                        using (item) {
+                            using (ALFBTRead readheader = ALFBTRead.Create(item.Header)) {
+                                using (ALFBTRead readvalue = ALFBTRead.Create(item.Stream))
+                                    if (Load(readheader, readvalue))
+                                        Debug.Log("[MemoryStream]ALFBT load");
+                            }
+                            item.Header.Dispose();
+                            item.Stream.Dispose();
                         }
         }
 
         public static void Reset() {
             management.Dispose();
-            management = new TranslationManagement();
+            management = new LanguageManager();
         }
 
-        public static bool Load(ALFBTRead read) => management.LoadTranslation(read);
+        [System.Obsolete("Use bool:Load(ALFBTRead, ALFBTRead)")]
+        public static bool Load(ALFBTRead read) => false;
 
-        public static TextFlag GetTextFlag(string path) => management.GetTextFlag(path);
+        public static bool Load(ALFBTRead header, ALFBTRead values) 
+            => management.Add(header.ReadOnly, values.ReadOnly);
 
-        public static LanguageInfo[] GetListOfLanguages() => management.GetListOfLanguages();
+        [System.Obsolete("Use string:GetLanguageText(string, string)")]
+        public static TextFlag GetTextFlag(string path) => new TextFlag();
 
-        public static MarkingFlag GetMarkingFlag(string path) => management.GetMarkingFlag(path);
+        [System.Obsolete("Use string:GetLanguageText(string, string)")]
+        public static MarkingFlag GetMarkingFlag(string path) => new MarkingFlag();
 
-        public static TranslationCollection GetTranslation(string lang) => management.GetTranslation(lang);
+        [System.Obsolete]
+        public static TranslationCollection GetTranslation(string lang) => null;
+
+        public static string GetLanguageText(string path)
+            => GetLanguageText(LanguageSelected, path);
+
+        public static string GetLanguageText(int index, string path) 
+            => management.GetLanguageText(index, path);
+
+        public static string GetLanguageText(string langTarget, string path) 
+            => management.GetLanguageText(langTarget, path);
+
+        public static string GetManifestText(string flagName) 
+            => GetManifestText(LanguageSelected, flagName);
+
+        public static string GetManifestText(int index, string flagName) 
+            => management[index].GetManifestText(flagName);
+
+        public static string GetManifestText(string langTarget, string flagName) 
+            => management[langTarget].GetManifestText(flagName);
+
+        public static LanguageInfo[] GetListOfLanguages() {
+            LanguageInfo[] res = new LanguageInfo[management.Count];
+            for (int I = 0; I < res.Length; I++)
+                res[I] = new LanguageInfo(management[I].GetManifestText("lang_target"), management[I].GetManifestText("lang_display"));
+            return res;
+        }
     }
 }

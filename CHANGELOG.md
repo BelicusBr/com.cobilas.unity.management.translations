@@ -1,4 +1,19 @@
 # Changelog
+## [1.0.7] - 01/02/2023
+### Added
+- O objeto `ALFBTHeader` adicionado para substituir o objeto `ALFBTLanguage`.
+### Changed
+- O unity translations manager agora se utiliza o `LanguageManager`.
+### Deprecated
+A funções da `TranslationManager`
+````c#
+public static bool Load(ALFBTRead);
+public static TextFlag GetTextFlag(string);
+public static MarkingFlag GetMarkingFlag(string);
+public static TranslationCollection GetTranslation(string);
+````
+### Removed
+- Os objetos `ALFBTLanguage`, `ALFBTFlagBase` e `ALFBTMarkingFlag`
 ## [1.0.6] 15/01/2023
 ### Change
 O `TranslationManager` foi modificado para se adequar.
