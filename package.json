@@ -1,8 +1,8 @@
 {
   "name": "com.cobilas.unity.management.translations",
-  "version": "1.0.7",
+  "version": "2.0.0",
   "displayName": "Cobilas Management Translations",
-  "description": "Pacote de gerenciamento de traduções para unity3d",
+  "description": "Pacote de gerenciamento de tradu\u00e7\u00f5es para unity3d",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.translations/blob/main/LICENSE.md",
   "changelogUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.translations/blob/main/CHANGELOG.md",
   "unity": "2019.1",
@@ -26,5 +26,10 @@
     "C#",
     "CSharp"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "com.cobilas.core": "^2.0.0",
+    "com.cobilas.unity.management.runtime": "^1.14.0",
+    "com.cobilas.unity.management.resource": "^1.13.0"
+  }
 }
