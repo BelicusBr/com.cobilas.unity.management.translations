@@ -4,7 +4,6 @@ using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
 using Cobilas.IO.Alf.Alfbt.Flags;
 using Cobilas.IO.Alf.Alfbt.Language;
-using Cobilas.IO.Alf.Management.Alfbt;
 using Cobilas.Unity.Management.Runtime;
 using Cobilas.Unity.Management.Resources;
 #if UNITY_EDITOR
@@ -79,20 +78,8 @@ namespace Cobilas.Unity.Management.Translation {
             management = new LanguageManager();
         }
 
-        [System.Obsolete("Use bool:Load(ALFBTRead, ALFBTRead)")]
-        public static bool Load(ALFBTRead read) => false;
-
         public static bool Load(ALFBTRead header, ALFBTRead values) 
             => management.Add(header.ReadOnly, values.ReadOnly);
-
-        [System.Obsolete("Use string:GetLanguageText(string, string)")]
-        public static TextFlag GetTextFlag(string path) => new TextFlag();
-
-        [System.Obsolete("Use string:GetLanguageText(string, string)")]
-        public static MarkingFlag GetMarkingFlag(string path) => new MarkingFlag();
-
-        [System.Obsolete]
-        public static TranslationCollection GetTranslation(string lang) => null;
 
         public static string GetLanguageText(string path)
             => GetLanguageText(LanguageSelected, path);
