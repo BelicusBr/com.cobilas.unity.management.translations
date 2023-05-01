@@ -1,10 +1,14 @@
 {
-    "name": "Cobilas.Unity.Test.Management.Translations",
+    "name": "Cobilas.Unity.Test.Editor.Management.Translations",
     "references": [
         "Cobilas.Core",
-        "Cobilas.Unity.Management.Translations"
+        "Cobilas.Unity.Management.Translations",
+        "Cobilas.Unity.Test.Management.Translations",
+        "Cobilas.Unity.Editor.Management.Translations"
     ],
-    "includePlatforms": [],
+    "includePlatforms": [
+        "Editor"
+    ],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": true,

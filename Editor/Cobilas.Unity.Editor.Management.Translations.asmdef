@@ -1,8 +1,8 @@
 {
     "name": "Cobilas.Unity.Editor.Management.Translations",
     "references": [
-        "Cobilas.Unity.Management.Translations",
-        "Cobilas.Core"
+        "Cobilas.Core",
+        "Cobilas.Unity.Management.Translations"
     ],
     "includePlatforms": [
         "Editor"
