@@ -1,9 +1,9 @@
 {
     "name": "Cobilas.Unity.Management.Translations",
     "references": [
+        "Cobilas.Core",
         "Cobilas.Unity.Management.Runtime",
-        "Cobilas.Unity.Management.Resource",
-        "Cobilas.Core"
+        "Cobilas.Unity.Management.Resource"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
