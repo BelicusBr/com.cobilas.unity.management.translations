@@ -1,4 +1,10 @@
 # Changelog
+## [2.1.0] - 29/08/2023
+## Changed
+- As dependencias do pacote foram aluteradas.
+## [2.0.0-ch1] - 28/08/2023
+### Changed
+- O autor do pacote foi alterado de `Cobilas CTB` para `BélicusBr`.
 ## [1.0.7] - 01/02/2023
 ### Added
 - O objeto `ALFBTHeader` adicionado para substituir o objeto `ALFBTLanguage`.
