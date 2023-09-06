@@ -1,4 +1,13 @@
 # Changelog
+## [2.2.0] - 06/09/2023
+### Changed
+- As dependencias do pacote foram aluteradas.
+- O atributo do metódo estatico `static void TranslationManager.Init()` recebeu o ID `#TranslationManager`.
+### Removed
+Metódos removidos
+```c# 
+    IEnumerator<ALFBTWriteTemp>:TranslationManager.IGetEnumerator();
+```
 ## [2.1.0] - 29/08/2023
 ## Changed
 - As dependencias do pacote foram aluteradas.

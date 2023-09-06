@@ -1,6 +1,6 @@
 {
   "name": "com.cobilas.unity.management.translations",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "displayName": "Cobilas Management Translations",
   "description": "Pacote de gerenciamento de tradu\u00e7\u00f5es para unity3d",
   "licensesUrl": "https://github.com/BelicusBr/com.cobilas.unity.management.translations/blob/main/LICENSE.md",
@@ -28,8 +28,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "com.cobilas.core": "3.0.0",
-    "com.cobilas.unity.management.runtime": "1.15.0",
-    "com.cobilas.unity.management.resource": "1.14.0"
+    "com.cobilas.unity.utility": "2.9.0",
+    "com.cobilas.unity.management.runtime": "2.0.0",
+    "com.cobilas.unity.management.resource": "2.0.1"
   }
 }

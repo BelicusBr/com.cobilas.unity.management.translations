@@ -2,7 +2,6 @@ using System.IO;
 using UnityEngine;
 using Cobilas.Collections;
 using Cobilas.IO.Alf.Alfbt;
-using Cobilas.IO.Alf.Alfbt.Flags;
 using Cobilas.IO.Alf.Alfbt.Language;
 using Cobilas.Unity.Management.Runtime;
 using Cobilas.Unity.Management.Resources;
@@ -54,11 +53,11 @@ namespace Cobilas.Unity.Management.Translation {
         //[CRIOLM_CallWhen(typeof(CobilasResources), CRIOLMType.AfterSceneLoad)]
         [CallWhenStart(InitializePriority.Low, "#ResourceManager")]
 #else
-        [StartBeforeSceneLoad]
+        [StartBeforeSceneLoad("#TranslationManager")]
 #endif
         private static void Init() {
             Application.quitting += management.Dispose;
-            TranslationList[] list = CobilasResources.GetAllSpecificObjectInFolder<TranslationList>("Resources/Translation");
+            TranslationList[] list = ResourceManager.GetAllSpecificObjectInFolder<TranslationList>("Resources/Translation");
             for (int I = 0; I < ArrayManipulation.ArrayLength(list); I++)
                 foreach (var item in list[I])
                     if (item != null)
