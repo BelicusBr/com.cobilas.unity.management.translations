@@ -29,15 +29,12 @@ namespace Cobilas.Unity.Management.Translation {
         }
 #endif
 
-        public IEnumerator<ALFBTWriteTemp> GetEnumerator()
-            => IGetEnumerator();
-
-        IEnumerator IEnumerable.GetEnumerator()
-            => IGetEnumerator();
-
-        private IEnumerator<ALFBTWriteTemp> IGetEnumerator() {
+        public IEnumerator<ALFBTWriteTemp> GetEnumerator() {
             for (int I = 0; I < ArrayManipulation.ArrayLength(languages); I++)
                 yield return new ALFBTWriteTemp(languages[I]);
         }
+
+        IEnumerator IEnumerable.GetEnumerator()
+            => (this as IEnumerable<ALFBTWriteTemp>).GetEnumerator();
     }
 }

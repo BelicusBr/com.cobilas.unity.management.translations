@@ -10,5 +10,8 @@
             this.language = language;
             this.displayName = displayName;
         }
+
+        public override string ToString()
+            => $"Lang:{language}\r\nDisplayName:{displayName}";
     }
 }
